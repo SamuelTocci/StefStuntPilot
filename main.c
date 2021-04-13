@@ -41,6 +41,7 @@ void main(void) {
         //**** put here a reference to one or more FSM's
         fsm_io();
         fsm_game();
+        // Hello world!!
 	}
 }
 
