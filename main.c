@@ -75,7 +75,7 @@ static void init(void) {
     TRISAbits.TRISA4 = 0;       // Backup pin
     TRISAbits.TRISA5 = 0;       // Backup pin
     ANSELAbits.ANSA5 = 0;       // Backup pin
-    TRISAbits.TRISA6 = 1;       // Gamemode Toggle IN 
+    TRISAbits.TRISA6 = 1;       // Gamemode Toggle IN a
     TRISAbits.TRISA7 = 1;       // Gamemode Toggle IN 
     
     TRISBbits.TRISB0 = 0;       // IO expander data out SDO OUT
