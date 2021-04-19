@@ -13,10 +13,16 @@
 #include <stdlib.h>
 
 /** D E F I N E S ***************************************************/
-#define PUSHED 0
+#define PUSHED 1
+#define ROW_ON 1
+#define ROW_OFF 0
 
 /** P R I V A T E   V A R I A B L E S *******************************/
-static enum {FSM_IDLE,BLINK_HIGH, BLINK_LOW 
+static enum {FSM_IDLE,
+        STATE1,
+        STATE2,
+        STATE3,
+        STATE4
             } current_state;
             
 /********************************************************************
@@ -39,37 +45,49 @@ void fsm_game_init(void) {
  * Overview:        An implementation for a simple reaction game
  ********************************************************************/
 void fsm_game(void) {
-    int counter = 0;
-    int timer = 0;
+    
     switch (current_state) { 
         case FSM_IDLE :
-        // *** outputs ***
-            //led1_output = 1;
-            LED1_OUT = 0;
-        // *** transitions ***
-            if (PRG_BUTTON == PUSHED)
-                counter ++;
-                int amount = counter;
-                current_state = BLINK_HIGH;
-            break;            
-        case BLINK_HIGH:
-            timer ++;
-            if(amount>0 && timer == 100)
-                LED1_OUT = 1;
-                timer = 0;
-                current_state = BLINK_LOW;
-            current_state = FSM_IDLE;
+            ROW4 = ROW_OFF;
+            ROW0 = ROW_ON;
+            
+            if (PLAYER0 == PUSHED)
+                current_state = STATE1;
             break;
-        case BLINK_LOW:
-            LED1_OUT = 0;
-            timer ++;
-            if(timer == 100)
-                timer = 0;
-                current_state = BLINK_HIGH;
-                
+            
+        case STATE1 : 
+            ROW0 = ROW_OFF;
+            ROW1 = ROW_ON;
+            
+            if (PLAYER1 == PUSHED)
+                current_state = STATE2;
+            break;
+            
+        case STATE2:
+            ROW1 = ROW_OFF;
+            ROW2 = ROW_ON;
+            
+            if (PLAYER2 == PUSHED)
+                current_state = STATE3;
+            break;
+            
+        case STATE3:
+            ROW2 = ROW_OFF;
+            ROW3 = ROW_ON;
+            
+            if (PLAYER3 == PUSHED)
+                current_state = STATE4;
+            break;
+        
+        case STATE4:
+            ROW3 = ROW_OFF;
+            ROW4 = ROW_ON;
+            
+            if (PLAYER4 == PUSHED)
+                current_state = FSM_IDLE;
+            break;    
         default:
-            current_state = FSM_IDLE;
+                current_state = FSM_IDLE;
             break;
     }
-    
 }

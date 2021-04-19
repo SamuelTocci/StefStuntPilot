@@ -58,7 +58,32 @@
 #define PRG_BUTTON      PORTCbits.RC0
 #define LED1_OUT        LATCbits.LATC1
 #define LED2_OUT        LATCbits.LATC2
-//#define PWM_OUT         LATBbits.LATB4
+
+// Rows
+#define ROW0            PORTBbits.RB3 // Out Rows
+#define ROW1            PORTBbits.RB4 // Out Rows
+#define ROW2            PORTBbits.RB5 // Out Rows
+#define ROW3            PORTBbits.RB6 // Out Rows
+#define ROW4            PORTBbits.RB7 // Out Rows
+
+// Columns
+
+// Players
+#define PLAYER0         PORTCbits.RC2 // In pins
+#define PLAYER1         PORTCbits.RC1 // In pins
+#define PLAYER2         PORTCbits.RC6 // In pins
+#define PLAYER3         PORTAbits.RA5 // In pins
+#define PLAYER4         PORTAbits.RA1 // In pins
+
+// Misc
+#define BUZZER          PORTBbits.RB2 // Buzzer
+#define CLOCK           PORTBbits.RB1 // Clock NOT SURE IF WE NEED THIS ONE
+#define SDO             PORTBbits.RB0 // SDO
+#define ADC             PORTAbits.RA0 // Buzzer
+#define SLAVE0          PORTAbits.RA2 // Slave 0
+#define SLAVE1          PORTAbits.RA3 // Slave 1
+#define BUTTON0         PORTAbits.RA6 // Button 0
+#define BUTTON1         PORTAbits.RA7 // Button 1
 
 /** I N C L U D E S *************************************************/
 #include <xc.h>

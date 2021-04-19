@@ -41,7 +41,6 @@ void main(void) {
         //**** put here a reference to one or more FSM's
         fsm_io();
         fsm_game();
-        // Hello world!!
 	}
 }
 
@@ -65,43 +64,43 @@ static void init(void) {
     OSCCONbits.IRCF = 0b111;    // put internal clock in 7th gear
     
 	// Configure I/O as input (1) or output (0)
-    TRISAbits.TRISA0 = 0;       // RA0 first analog input or digital IO
-    ANSELAbits.ANSA0 = 0;       // When input, set RA0 as analog or digital
-    TRISAbits.TRISA1 = 0;       // RA1 second analog input or digital IO
-    ANSELAbits.ANSA1 = 0;       // When input, set RA1 as analog or digital
-    TRISAbits.TRISA2 = 0;       // RA2 third analog input or digital IO
-    ANSELAbits.ANSA2 = 0;       // When input, set RA2 as analog or digital
-    TRISAbits.TRISA3 = 0;       // RA3 fourth analog input or digital IO
-    ANSELAbits.ANSA3 = 0;       // When input, set RA3 as analog or digital
-    TRISAbits.TRISA4 = 0;       // RA4 digital output only
-    TRISAbits.TRISA5 = 0;       // RA5 fifth analog input or digital IO
-    ANSELAbits.ANSA5 = 0;       // When input, set RA5 as analog or digital
-    TRISAbits.TRISA6 = 0;
-    TRISAbits.TRISA7 = 0;
+    TRISAbits.TRISA0 = 1;       // ADC IN
+    ANSELAbits.ANSA0 = 1;       // 1 = Analog
+    TRISAbits.TRISA1 = 1;       // Player 4 IN
+    ANSELAbits.ANSA1 = 0;       // 0 = digital IO
+    TRISAbits.TRISA2 = 0;       // Slave select 0 OUT
+    ANSELAbits.ANSA2 = 0;       // 0 = digital IO
+    TRISAbits.TRISA3 = 0;       // Slave select 1 OUT
+    ANSELAbits.ANSA3 = 0;       // 0 = digital IO
+    TRISAbits.TRISA4 = 0;       // Backup pin
+    TRISAbits.TRISA5 = 0;       // Backup pin
+    ANSELAbits.ANSA5 = 0;       // Backup pin
+    TRISAbits.TRISA6 = 1;       // Gamemode Toggle IN 
+    TRISAbits.TRISA7 = 1;       // Gamemode Toggle IN 
     
-    TRISBbits.TRISB0 = 0;       // IO expander CS
-    ANSELBbits.ANSB0 = 0;
-    TRISBbits.TRISB1 = 0;       // IO expander clock
-    ANSELBbits.ANSB1 = 0;
-    TRISBbits.TRISB2 = 0;       // ...
-    ANSELBbits.ANSB2 = 0;
-    TRISBbits.TRISB3 = 0;       // ...
-    ANSELBbits.ANSB3 = 0;
-    TRISBbits.TRISB4 = 0;       // ...
-    ANSELBbits.ANSB4 = 0;
-    TRISBbits.TRISB5 = 0;       // ...
-    ANSELBbits.ANSB5 = 0;
-    TRISBbits.TRISB6 = 0;       // ...
-    TRISBbits.TRISB7 = 0;       // ...
+    TRISBbits.TRISB0 = 0;       // IO expander data out SDO OUT
+    ANSELBbits.ANSB0 = 0;       // 0 = digital IO
+    TRISBbits.TRISB1 = 0;       // IO expander clock CLK
+    ANSELBbits.ANSB1 = 0;       // 0 = digital IO
+    TRISBbits.TRISB2 = 0;       // Buzzer OUT
+    ANSELBbits.ANSB2 = 0;       // 0 = digital IO
+    TRISBbits.TRISB3 = 0;       // Row 1 OUT
+    ANSELBbits.ANSB3 = 0;       // 0 = digital IO
+    TRISBbits.TRISB4 = 0;       // Row 2 OUT
+    ANSELBbits.ANSB4 = 0;       // 0 = digital IO
+    TRISBbits.TRISB5 = 0;       // Row 3 OUT
+    ANSELBbits.ANSB5 = 0;       // 0 = digital IO
+    TRISBbits.TRISB6 = 0;       // Row 4 OUT
+    TRISBbits.TRISB7 = 0;       // Row 5 OUT
     
     TRISCbits.TRISC0 = 1;       // Pushbutton on the µC PCB
-    TRISCbits.TRISC1 = 0;       // LED2 on the µC PCB
-    TRISCbits.TRISC2 = 0;       // LED1 on the µC PCB
-    ANSELCbits.ANSC2 = 0;
-    TRISCbits.TRISC6 = 0;       // ...
-    ANSELCbits.ANSC6 = 0;
-    TRISCbits.TRISC7 = 0;       // IO expander data out
-    ANSELCbits.ANSC7 = 0;
+    TRISCbits.TRISC1 = 1;       // Player 1 IN
+    TRISCbits.TRISC2 = 1;       // Player 0 IN
+    ANSELCbits.ANSC2 = 0;       // 0 = digital IO
+    TRISCbits.TRISC6 = 1;       // Player 2 IN
+    ANSELCbits.ANSC6 = 0;       // 0 = digital IO
+    TRISCbits.TRISC7 = 1;       // Player 3 IN
+    ANSELCbits.ANSC7 = 0;       // 0 = digital IO
     
     led1_output = 0;
     //PWM_duty[0] = 0;
