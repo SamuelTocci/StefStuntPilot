@@ -53,6 +53,7 @@ void ADC_init(void) {
  * Overview:        ADC Interrupt service routine will process all ADC
  *                  data and load it in the ADC_value array
  ********************************************************************/
+
 void ADC_ISR(void) {
     if (PIR1bits.ADIF == 1) {
         if (!busyADC()) {
@@ -82,6 +83,7 @@ void ADC_ISR(void) {
  * Output:          None
  * Overview:        Will initialize the ADC given the parameters
  ********************************************************************/
+
 static void openADC(unsigned char channels, unsigned char intEnable) {
     ADCON0bits.CHS = 0;
     ADCON1bits.NVCFG = 0;

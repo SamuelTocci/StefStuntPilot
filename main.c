@@ -18,6 +18,15 @@
 // in order for the variable to be used in other file, it also has to
 // be declared as 'extern' in the config.h file
 unsigned char led1_output;
+unsigned char counter;
+
+unsigned char player0_score;
+unsigned char player1_score;
+unsigned char player2_score;
+unsigned char player3_score;
+unsigned char player4_score;
+
+unsigned char dode_mensen_count;
 
 /** P R I V A T E   V A R I A B L E S *******************************/
 
@@ -37,10 +46,169 @@ static unsigned char timed_to_1ms(void);
  ********************************************************************/
 void main(void) {
 	init();						//initialize the system
+    OpenTimer0(1);
+    IOEXP_init();
+    player0_score = 3;
+    player1_score = 3;
+    player2_score = 3;
+    player3_score = 3;
+    player4_score = 3;
+    counter = 0;
 	while(timed_to_1ms()) {
-        //**** put here a reference to one or more FSM's
-        fsm_io();
-        fsm_game();
+        counter++;
+        if(dode_mensen_count == 4){
+            if(counter %16 == 0){
+                IOEXP_send(0x02, 3); //GP1
+            }
+            if(counter %32 == 1){
+                IOEXP_send(0x04, 3); //GP2
+            }
+            if(counter %64 == 2){
+                IOEXP_send(0x08, 3); //GP3
+            }
+            break;
+        }
+        if(column_select != 4 && dode_mensen_count != 4){
+            switch(score_select){
+                case 0:
+                    if(counter %3 == 0 && player0_score > 0){
+                        IOEXP_send(0x02, 3); //GP1
+                    }
+                    if(counter %3 == 1 && player0_score > 1){
+                        IOEXP_send(0x04, 3); //GP2
+                    }
+                    if(counter %3 == 2 && player0_score > 2){
+                        IOEXP_send(0x08, 3); //GP3
+                    }
+                    break;
+                case 1:
+                    if(counter %3 == 0 && player1_score > 0){
+                        IOEXP_send(0x02, 3); //GP1
+                    }
+                    if(counter %3 == 1 && player1_score > 1){
+                        IOEXP_send(0x04, 3); //GP2
+                    }
+                    if(counter %3 == 2 && player1_score > 2){
+                        IOEXP_send(0x08, 3); //GP3
+                    }
+                    break;
+                case 2:
+                    if(counter %3 == 0 && player2_score > 0){
+                        IOEXP_send(0x02, 3); //GP1
+                    }
+                    if(counter %3 == 1 && player2_score > 1){
+                        IOEXP_send(0x04, 3); //GP2
+                    }
+                    if(counter %3 == 2 && player2_score > 2){
+                        IOEXP_send(0x08, 3); //GP3
+                    }
+                    break;
+                case 3:
+                    if(counter %3 == 0 && player3_score > 0){
+                        IOEXP_send(0x02, 3); //GP1
+                    }
+                    if(counter %3 == 1 && player3_score > 1){
+                        IOEXP_send(0x04, 3); //GP2
+                    }
+                    if(counter %3 == 2 && player3_score > 2){
+                        IOEXP_send(0x08, 3); //GP3
+                    }
+                    break;
+                case 4:
+                    if(counter %3 == 0 && player4_score > 0){
+                        IOEXP_send(0x02, 3); //GP1
+                    }
+                    if(counter %3 == 1 && player4_score > 1){
+                        IOEXP_send(0x04, 3); //GP2
+                    }
+                    if(counter %3 == 2 && player4_score > 2){
+                        IOEXP_send(0x08, 3); //GP3
+                    }
+                    break;
+            }
+        }
+        if(column_select == 4 && dode_mensen_count != 4){
+            switch(score_select){
+                case 0:
+                    if(counter %4 == 0 && player0_score > 0){
+                        IOEXP_send(0x02, 3); //GP1
+                    }
+                    if(counter %4 == 1 && player0_score > 1){
+                        IOEXP_send(0x04, 3); //GP2
+                    }
+                    if(counter %4 == 2 && player0_score > 2){
+                        IOEXP_send(0x08, 3); //GP3
+                    }
+                    if(counter %4 == 3){
+                        IOEXP_send(0x01, 3);
+                    }
+                    break;
+                case 1:
+                    if(counter %4 == 0 && player1_score > 0){
+                        IOEXP_send(0x02, 3); //GP1
+                    }
+                    if(counter %4 == 1 && player1_score > 1){
+                        IOEXP_send(0x04, 3); //GP2
+                    }
+                    if(counter %4 == 2 && player1_score > 2){
+                        IOEXP_send(0x08, 3); //GP3
+                    }
+                    if(counter %4 == 3){
+                        IOEXP_send(0x01, 3);
+                    }
+                    break;
+                case 2:
+                    if(counter %4 == 0 && player2_score > 0){
+                        IOEXP_send(0x02, 3); //GP1
+                    }
+                    if(counter %4 == 1 && player2_score > 1){
+                        IOEXP_send(0x04, 3); //GP2
+                    }
+                    if(counter %4 == 2 && player2_score > 2){
+                        IOEXP_send(0x08, 3); //GP3
+                    }
+                    if(counter %4 == 3){
+                        IOEXP_send(0x01, 3);
+                    }
+                    break;
+                case 3:
+                    if(counter %4 == 0 && player3_score > 0){
+                        IOEXP_send(0x02, 3); //GP1
+                    }
+                    if(counter %4 == 1 && player3_score > 1){
+                        IOEXP_send(0x04, 3); //GP2
+                    }
+                    if(counter %4 == 2 && player3_score > 2){
+                        IOEXP_send(0x08, 3); //GP3
+                    }
+                    if(counter %4 == 3){
+                        IOEXP_send(0x01, 3);
+                    }
+                    break;
+                case 4:
+                    if(counter %4 == 0 && player4_score > 0){
+                        IOEXP_send(0x02, 3); //GP1
+                    }
+                    if(counter %4 == 1 && player4_score > 1){
+                        IOEXP_send(0x04, 3); //GP2
+                    }
+                    if(counter %4 == 2 && player4_score > 2){
+                        IOEXP_send(0x08, 3); //GP3
+                    }
+                    if(counter %4 == 3){
+                        IOEXP_send(0x01, 3);
+                    }
+                    break;
+            }
+        }
+        
+        if (counter == 250)
+        {
+            if(dode_mensen_count != 4){
+                fsm_game();
+            }
+            counter = 0;
+        }
 	}
 }
 
@@ -65,7 +233,7 @@ static void init(void) {
     
 	// Configure I/O as input (1) or output (0)
     TRISAbits.TRISA0 = 1;       // ADC IN
-    ANSELAbits.ANSA0 = 1;       // 1 = Analog
+    ANSELAbits.ANSA0 = 0;       // 1 = Analog
     TRISAbits.TRISA1 = 1;       // Player 4 IN
     ANSELAbits.ANSA1 = 0;       // 0 = digital IO
     TRISAbits.TRISA2 = 0;       // Slave select 0 OUT
@@ -75,7 +243,7 @@ static void init(void) {
     TRISAbits.TRISA4 = 0;       // Backup pin
     TRISAbits.TRISA5 = 0;       // Backup pin
     ANSELAbits.ANSA5 = 0;       // Backup pin
-    TRISAbits.TRISA6 = 1;       // Gamemode Toggle IN a
+    TRISAbits.TRISA6 = 1;       // Gamemode Toggle IN
     TRISAbits.TRISA7 = 1;       // Gamemode Toggle IN 
     
     TRISBbits.TRISB0 = 0;       // IO expander data out SDO OUT
@@ -95,11 +263,11 @@ static void init(void) {
     
     TRISCbits.TRISC0 = 1;       // Pushbutton on the µC PCB
     TRISCbits.TRISC1 = 1;       // Player 1 IN
-    TRISCbits.TRISC2 = 1;       // Player 0 IN
+    TRISCbits.TRISC2 = 0;       // Player 0 IN
     ANSELCbits.ANSC2 = 0;       // 0 = digital IO
-    TRISCbits.TRISC6 = 1;       // Player 2 IN
+    TRISCbits.TRISC6 = 0;       // Player 2 IN
     ANSELCbits.ANSC6 = 0;       // 0 = digital IO
-    TRISCbits.TRISC7 = 1;       // Player 3 IN
+    TRISCbits.TRISC7 = 0;       // SDO OUT
     ANSELCbits.ANSC7 = 0;       // 0 = digital IO
     
     led1_output = 0;
@@ -167,6 +335,12 @@ static unsigned char timed_to_1ms(void) {
  *                  condition is  reached
  ********************************************************************/	
 void __interrupt(high_priority) interrupt_high_handler(void) {
+    if(INTCONbits.TMR0IF == 1)
+    {
+        TMR0L = 0x00;                   //reload the value to the Timer0
+        INTCONbits.TMR0IF=0;            //CLEAR interrupt flag when you are done!!!
+    }
+    
 #if ENABLE_AUDIO == TRUE
     AUDIO_ISR();
 #endif

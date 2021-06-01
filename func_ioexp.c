@@ -76,7 +76,7 @@ void IOEXP_init() {
     IOEXP_CS = 1;                 //CS high
     
     // uncomment when 2 IOexpanders are used
-    /*
+    
     IOEXP_CS = 0;                 //CS low
     SPI_send(IO_OPCODE | (1 << 1) | IO_WRITE );
     SPI_send(IO_TRIS);
@@ -88,7 +88,7 @@ void IOEXP_init() {
     SPI_send(IO_IOCON);
     SPI_send(IO_IOCON_value);     // put hardware addressing IOexp ON
     IOEXP_CS = 1;                 //CS high
-    */
+    
     
     // uncomment when 3 IOexpanders are used
     /*

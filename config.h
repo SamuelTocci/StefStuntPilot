@@ -28,7 +28,7 @@
 /*** IO expander configuration *********** 
  * BE AWARE: When using the IO expander RC7 and RB1 are used for communication
  * RB0 can only be used as output, in this example we use it as CS */
-// #define ENABLE_IOEXP TRUE
+#define ENABLE_IOEXP TRUE
 
 #define IOEXP_DATA          LATCbits.LATC7
 #define IOEXP_CLK           LATBbits.LATB1
@@ -41,13 +41,6 @@
 /* Specify the pin for your audio output, every digital output can be used */
 #define AUDIO_OUT           LATBbits.LATB3
 
-
-/*** Servo Configuration *****************/
-// #define ENABLE_SERVO TRUE
-
-/* If you are using a servo specify how many you are using
- * for every servo you need to alter the SERVO_ISR() method in func_servo.c 
- * to update the outputs for the servo's */
 #define SERVO_CHANNELS 1
 
 #define SERVO_0_OUT LATBbits.LATB7
@@ -66,22 +59,15 @@
 #define ROW3            PORTBbits.RB6 // Out Rows
 #define ROW4            PORTBbits.RB7 // Out Rows
 
-// Columns
-
 // Players
-#define PLAYER0         PORTCbits.RC2 // In pins
-#define PLAYER1         PORTCbits.RC1 // In pins
-#define PLAYER2         PORTCbits.RC6 // In pins
-#define PLAYER3         PORTAbits.RA5 // In pins
-#define PLAYER4         PORTAbits.RA1 // In pins
+#define PLAYER0_BUTTON  PORTCbits.RC2 // In pins
+#define PLAYER1_BUTTON  PORTCbits.RC1 // In pins
+#define PLAYER2_BUTTON  PORTCbits.RC6 // In pins
+#define PLAYER3_BUTTON  PORTAbits.RA0 // In pins
+#define PLAYER4_BUTTON  PORTAbits.RA1 // In pins
 
 // Misc
 #define BUZZER          PORTBbits.RB2 // Buzzer
-#define CLOCK           PORTBbits.RB1 // Clock NOT SURE IF WE NEED THIS ONE
-#define SDO             PORTBbits.RB0 // SDO
-#define ADC             PORTAbits.RA0 // Buzzer
-#define SLAVE0          PORTAbits.RA2 // Slave 0
-#define SLAVE1          PORTAbits.RA3 // Slave 1
 #define BUTTON0         PORTAbits.RA6 // Button 0
 #define BUTTON1         PORTAbits.RA7 // Button 1
 
@@ -94,6 +80,19 @@
 #include "func_servo.h"
 
 /** G L O B A L   P U B L I C   V A R I A B L E S *******************/
+unsigned char timer;
+unsigned char state;
+extern unsigned char score_select;
+extern unsigned char column_select;
+
+extern unsigned char player0_score;
+extern unsigned char player1_score;
+extern unsigned char player2_score;
+extern unsigned char player3_score;
+extern unsigned char player4_score;
+
+extern unsigned char dode_mensen_count;
+
 // when a variable is declared 'extern' it also has to be declared in
 // the corresponding .c file without the 'extern' keyword
 //extern unsigned char led1_output;
@@ -120,4 +119,3 @@ void fsm_game(void);
 
 #endif
 //EOF----------------------------------------------------------------
-
